@@ -18,7 +18,8 @@ module.exports = options => {
             options.escapeUrl.push(options.errorPage);
         }
         if (ctx.path.match(options.matchPattern) !== null && !options.escapeUrl.includes(ctx.path)) {
-            const result = await checkPermission(ctx.session.user, ctx.path, ctx.app.permissions, ctx.app.menus.concat(ctx.app.operations));
+            // const result = await checkPermission(ctx.session.user, ctx.path, ctx.app.permissions, ctx.app.menus.concat(ctx.app.operations));
+            const result = await checkPermission(ctx.session.user, ctx.originalUrl, ctx.app.permissions, ctx.app.menus.concat(ctx.app.operations));
             if (typeof result === 'number') {
                 // 当用户不存在，重定向home页面
                 if (result === 401) {
